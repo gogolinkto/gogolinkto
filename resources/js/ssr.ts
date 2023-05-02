@@ -23,5 +23,6 @@ createServer((page) =>
                     location: new URL(page.props.ziggy.location),
                 });
         },
-    })
+    }),
+    13724,
 );
