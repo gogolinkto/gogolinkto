@@ -1,26 +1,17 @@
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "module": "esnext",
-        "moduleResolution": "node",
-        "strict": true,
-        "jsx": "preserve",
-        "sourceMap": true,
-        "resolveJsonModule": true,
-        "esModuleInterop": true,
-        "allowJs": true,
-        "lib": ["esnext", "dom"],
-        "types": ["@types/node", "@types/ziggy-js", "vite/client"],
-        "paths": {
-            "@/*": ["./resources/js/*"]
-        },
-        "outDir": "./public/build/assets"
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "rootDir": "./resources/js",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@/*": ["./resources/js/*"]
     },
-    "typeRoots": ["./node_modules/@types", "resources/js/types"],
-    "include": [
-        "resources/js/**/*.ts",
-        "resources/js/**/*.d.ts",
-        "resources/js/**/*.vue"
-    ],
-    "exclude": ["node_modules", "public"]
+    "types": ["vite/client", "node", "react"]
+  }
 }
