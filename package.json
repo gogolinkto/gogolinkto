@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
+    "@heroicons/react": "^2.0.18",
     "@inertiajs/core": "^1.0.6",
     "@inertiajs/react": "^1.0.6",
     "@inertiajs/server": "^0.1.0",

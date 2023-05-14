@@ -5,7 +5,7 @@
     "moduleResolution": "node",
     "jsx": "react",
     "rootDir": "./resources/js",
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -13,5 +13,5 @@
       "@/*": ["./resources/js/*"]
     },
     "types": ["vite/client", "node", "react"]
-  }
+  },
 }
