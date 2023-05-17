@@ -49,6 +49,14 @@ export type InertiaSharedProps<T = {}> = T & {
   auth: Auth;
   errorBags: any;
   errors: any;
+  currentRoute: string;
+  notifications: {
+      type: string;
+      message: string;
+      title: string;
+      disappearAfter: number;
+      group: string|null;
+  }[];
 };
 
 export interface Session {

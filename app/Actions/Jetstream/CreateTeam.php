@@ -2,6 +2,7 @@
 
 namespace App\Actions\Jetstream;
 
+use App\Http\Inertia\Notification;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
@@ -31,6 +32,8 @@ class CreateTeam implements CreatesTeams
             'name' => $input['name'],
             'personal_team' => false,
         ]));
+
+        Notification::success('Team Created', 'Your team has been created.');
 
         return $team;
     }

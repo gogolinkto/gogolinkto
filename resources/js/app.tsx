@@ -6,6 +6,7 @@ import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';
 import { RouteContext } from '@/Hooks/useRoute';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import NotificationWrapper from "@/Components/Notifications/NotificationWrapper";
 
 const appName ='GoGoLink';
 
@@ -23,7 +24,9 @@ createInertiaApp({
     const root = createRoot(el);
     return root.render(
       <RouteContext.Provider value={(window as any).route}>
-        <App {...props} />
+        <NotificationWrapper>
+            <App {...props} />
+        </NotificationWrapper>
       </RouteContext.Provider>,
     );
   },

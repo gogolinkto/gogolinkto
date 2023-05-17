@@ -2,6 +2,7 @@
 
 namespace App\Actions\Jetstream;
 
+use App\Http\Inertia\Notification;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
@@ -26,5 +27,7 @@ class UpdateTeamName implements UpdatesTeamNames
         $team->forceFill([
             'name' => $input['name'],
         ])->save();
+
+        Notification::success('Team Updated', "Your team's name has been updated to {$team->name}.");
     }
 }

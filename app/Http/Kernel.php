@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\FlashNotificationsMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -38,6 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
+            FlashNotificationsMiddleware::class,
         ],
 
         'api' => [

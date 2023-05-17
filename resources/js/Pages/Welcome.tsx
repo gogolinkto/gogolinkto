@@ -1,8 +1,9 @@
 import { Link } from '@inertiajs/react';
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
 import { Head } from '@inertiajs/react';
+import {NotificationContext} from "@/Contexts/notification";
 
 interface Props {
   canLogin: boolean;

@@ -8,13 +8,15 @@ module.exports = {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.tsx',
-        './node_modules/flowbite/**/*.js',
     ],
 
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: [
+                    // 'Poppins',
+                    ...defaultTheme.fontFamily.sans
+                ],
             },
         },
     },

@@ -2,7 +2,6 @@ import DeleteTeamForm from '@/Pages/Teams/Partials/DeleteTeamForm';
 import TeamMemberManager from '@/Pages/Teams/Partials/TeamMemberManager';
 import UpdateTeamNameForm from '@/Pages/Teams/Partials/UpdateTeamNameForm';
 import SectionBorder from '@/Components/SectionBorder';
-import AppLayout from '@/Layouts/AppLayout';
 import {
   JetstreamTeamPermissions,
   Role,
@@ -11,6 +10,7 @@ import {
   User,
 } from '@/types';
 import React from 'react';
+import NewLayout from "@/Layouts/NewLayout";
 
 interface UserMembership extends User {
   membership: {
@@ -30,13 +30,8 @@ interface Props {
 
 export default function Show({ team, availableRoles, permissions }: Props) {
   return (
-    <AppLayout
+    <NewLayout
       title="Team Settings"
-      renderHeader={() => (
-        <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-          Team Settings
-        </h2>
-      )}
     >
       <div>
         <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
@@ -61,6 +56,6 @@ export default function Show({ team, availableRoles, permissions }: Props) {
           ) : null}
         </div>
       </div>
-    </AppLayout>
+    </NewLayout>
   );
 }

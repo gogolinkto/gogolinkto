@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Inertia\Notification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 
@@ -36,6 +38,8 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
+            'currentRoute' => Route::getCurrentRoute()->getName(),
+            'notifications' => Notification::recover(),
         ]);
     }
 }
