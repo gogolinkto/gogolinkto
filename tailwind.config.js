@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -8,16 +9,18 @@ module.exports = {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
-        './node_modules/flowbite/**/*.js',
     ],
 
     theme: {
         extend: {
+            colors: {
+                primary: colors.blue,
+            },
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: [...defaultTheme.fontFamily.sans],
             },
         },
     },
 
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), require('flowbite/plugin')],
+    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 };

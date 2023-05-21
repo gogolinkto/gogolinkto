@@ -5,3 +5,7 @@
 [x-cloak] {
     display: none;
 }
+
+#app {
+    @apply h-full; /* feel free to add more classes */
+}

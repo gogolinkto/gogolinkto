@@ -7,6 +7,12 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import LoginWithSocial from "@/Components/Auth/LoginWithSocial.vue";
+import FormLabel from "@/Components/Form/FormLabel.vue";
+import FormGroup from "@/Components/Form/FormGroup.vue";
+import FormInput from "@/Components/Form/FormInput.vue";
+import AuthPageTitle from "@/Components/Auth/AuthPageTitle.vue";
+import AppButton from "@/Components/Generic/AppButton.vue";
 
 const form = useForm({
     name: '',
@@ -26,87 +32,38 @@ const submit = () => {
 <template>
     <Head title="Register" />
 
-    <AuthenticationCard>
-        <template #logo>
-            <AuthenticationCardLogo />
-        </template>
+    <div class="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <AuthPageTitle>Create your free account</AuthPageTitle>
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
+            <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+                <form class="space-y-6" :action="route('login')" method="POST" @submit.prevent="submit">
+                    <FormGroup :error="form.errors.email">
+                        <FormLabel>Name</FormLabel>
+                        <FormInput v-model="form.name" @input="form.clearErrors('name')" name="name" type="text" autocomplete="name" required="" :disabled="form.processing" />
+                    </FormGroup>
+                    <FormGroup :error="form.errors.email">
+                        <FormLabel>Email address</FormLabel>
+                        <FormInput v-model="form.email" @input="form.clearErrors('email')" name="email" type="email" autocomplete="email" required="" :disabled="form.processing" />
+                    </FormGroup>
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="name" value="Name" />
-                <TextInput
-                    id="name"
-                    v-model="form.name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    required
-                    autofocus
-                    autocomplete="name"
-                />
-                <InputError class="mt-2" :message="form.errors.name" />
-            </div>
+                    <FormGroup :error="form.errors.password">
+                        <FormLabel>Password</FormLabel>
+                        <FormInput v-model="form.password" @input="form.clearErrors('email', 'password')" name="password" type="password" autocomplete="current-password" required="" :disabled="form.processing" />
+                    </FormGroup>
 
-            <div class="mt-4">
-                <InputLabel for="email" value="Email" />
-                <TextInput
-                    id="email"
-                    v-model="form.email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="username"
-                />
-                <InputError class="mt-2" :message="form.errors.email" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
-                <TextInput
-                    id="password"
-                    v-model="form.password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="new-password"
-                />
-                <InputError class="mt-2" :message="form.errors.password" />
-            </div>
-
-            <div class="mt-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
-                <TextInput
-                    id="password_confirmation"
-                    v-model="form.password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="new-password"
-                />
-                <InputError class="mt-2" :message="form.errors.password_confirmation" />
-            </div>
-
-            <div v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature" class="mt-4">
-                <InputLabel for="terms">
-                    <div class="flex items-center">
-                        <Checkbox id="terms" v-model:checked="form.terms" name="terms" required />
-
-                        <div class="ml-2">
-                            I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Privacy Policy</a>
-                        </div>
+                    <div>
+                        <AppButton class="w-full" type="submit" :disabled="form.processing">{{ form.processing ? 'Trying to Sign you In' : 'Register'}}</AppButton>
                     </div>
-                    <InputError class="mt-2" :message="form.errors.terms" />
-                </InputLabel>
+                </form>
+
+                <LoginWithSocial />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Already registered?
-                </Link>
-
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </PrimaryButton>
-            </div>
-        </form>
-    </AuthenticationCard>
+            <p class="mt-10 text-center text-sm text-gray-500">
+                Already a member?
+                {{ ' ' }}
+                <Link :href="route('login')" class="font-semibold leading-6 text-primary-600 hover:text-primary-500">Sign in with your account</Link>
+            </p>
+        </div>
+    </div>
 </template>
