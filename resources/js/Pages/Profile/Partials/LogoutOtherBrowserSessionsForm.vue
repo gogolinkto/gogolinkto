@@ -8,6 +8,7 @@ import InputError from '@/Components/InputError.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import AppButton from "@/Components/Generic/AppButton.vue";
 
 defineProps({
     sessions: Array,
@@ -88,9 +89,9 @@ const closeModal = () => {
             </div>
 
             <div class="flex items-center mt-5">
-                <PrimaryButton @click="confirmLogout">
+                <AppButton @click="confirmLogout">
                     Log Out Other Browser Sessions
-                </PrimaryButton>
+                </AppButton>
 
                 <ActionMessage :on="form.recentlySuccessful" class="ml-3">
                     Done.

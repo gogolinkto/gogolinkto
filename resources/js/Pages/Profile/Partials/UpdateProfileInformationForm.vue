@@ -5,9 +5,12 @@ import ActionMessage from '@/Components/ActionMessage.vue';
 import FormSection from '@/Components/FormSection.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import AppButton from "@/Components/Generic/AppButton.vue";
+import FormGroup from "@/Components/Form/FormGroup.vue";
+import FormLabel from "@/Components/Form/FormLabel.vue";
+import FormInput from "@/Components/Form/FormInput.vue";
 
 const props = defineProps({
     user: Object,
@@ -128,30 +131,23 @@ const clearPhotoFileInput = () => {
             </div>
 
             <!-- Name -->
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="name" value="Name" />
-                <TextInput
-                    id="name"
+            <FormGroup class="col-span-6 sm:col-span-4" :error="form.errors.name">
+                <FormLabel>Name</FormLabel>
+                <FormInput
                     v-model="form.name"
                     type="text"
-                    class="mt-1 block w-full"
                     autocomplete="name"
                 />
-                <InputError :message="form.errors.name" class="mt-2" />
-            </div>
+            </FormGroup>
 
             <!-- Email -->
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="email" value="Email" />
-                <TextInput
-                    id="email"
+            <FormGroup class="col-span-6 sm:col-span-4" :error="form.errors.email">
+                <FormLabel>Email</FormLabel>
+                <FormInput
                     v-model="form.email"
                     type="email"
-                    class="mt-1 block w-full"
                     autocomplete="username"
                 />
-                <InputError :message="form.errors.email" class="mt-2" />
-
                 <div v-if="$page.props.jetstream.hasEmailVerification && user.email_verified_at === null">
                     <p class="text-sm mt-2">
                         Your email address is unverified.
@@ -171,7 +167,7 @@ const clearPhotoFileInput = () => {
                         A new verification link has been sent to your email address.
                     </div>
                 </div>
-            </div>
+            </FormGroup>
         </template>
 
         <template #actions>
@@ -179,9 +175,9 @@ const clearPhotoFileInput = () => {
                 Saved.
             </ActionMessage>
 
-            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <AppButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Save
-            </PrimaryButton>
+            </AppButton>
         </template>
     </FormSection>
 </template>

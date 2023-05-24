@@ -7,6 +7,7 @@ declare global {
                 id: number;
                 name: string;
                 email: string;
+                profile_photo_url: string;
                 created_at: Date;
                 updated_at: Date;
             };

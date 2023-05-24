@@ -9,6 +9,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import AppButton from "@/Components/Generic/AppButton.vue";
 
 const props = defineProps({
     requiresConfirmation: Boolean,
@@ -189,9 +190,9 @@ const disableTwoFactorAuthentication = () => {
             <div class="mt-5">
                 <div v-if="! twoFactorEnabled">
                     <ConfirmsPassword @confirmed="enableTwoFactorAuthentication">
-                        <PrimaryButton type="button" :class="{ 'opacity-25': enabling }" :disabled="enabling">
+                        <AppButton type="button" :class="{ 'opacity-25': enabling }" :disabled="enabling">
                             Enable
-                        </PrimaryButton>
+                        </AppButton>
                     </ConfirmsPassword>
                 </div>
 
