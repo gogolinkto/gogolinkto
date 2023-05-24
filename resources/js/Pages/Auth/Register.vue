@@ -48,7 +48,12 @@ const submit = () => {
 
                     <FormGroup :error="form.errors.password">
                         <FormLabel>Password</FormLabel>
-                        <FormInput v-model="form.password" @input="form.clearErrors('email', 'password')" name="password" type="password" autocomplete="current-password" required="" :disabled="form.processing" />
+                        <FormInput v-model="form.password" @input="form.clearErrors('password')" name="password" type="password" autocomplete="current-password" required="" :disabled="form.processing" />
+                    </FormGroup>
+
+                    <FormGroup :error="form.errors.password_confirmation">
+                        <FormLabel>Confirm Password</FormLabel>
+                        <FormInput v-model="form.password_confirmation" @input="form.clearErrors('password_confirmation')" name="password_confirmation" type="password" autocomplete="current-password" required="" :disabled="form.processing" />
                     </FormGroup>
 
                     <div>
