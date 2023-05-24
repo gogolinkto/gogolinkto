@@ -11,7 +11,7 @@ export function provideFormData(data: FormData): void {
 
 export function injectFormData(): FormData {
     return inject<FormData>('formData', {
-        uuid: crypto.randomUUID(),
+        uuid: Math.random().toString(36).substring(2, 9),
         error: null,
     });
 }
