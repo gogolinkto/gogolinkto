@@ -17,7 +17,7 @@ const props = defineProps({
     },
 })
 
-const uuid = crypto.randomUUID();
+const uuid = Math.random().toString(36).substring(2, 9);
 const formData = reactive({
     uuid,
     error: props.error ?? null,
