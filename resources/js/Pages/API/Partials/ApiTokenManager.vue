@@ -14,6 +14,10 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import SectionBorder from '@/Components/SectionBorder.vue';
 import TextInput from '@/Components/TextInput.vue';
+import AppButton from "@/Components/Generic/AppButton.vue";
+import FormGroup from "@/Components/Form/FormGroup.vue";
+import FormLabel from "@/Components/Form/FormLabel.vue";
+import FormInput from "@/Components/Form/FormInput.vue";
 
 const props = defineProps({
     tokens: Array,
@@ -86,17 +90,14 @@ const deleteApiToken = () => {
 
             <template #form>
                 <!-- Token Name -->
-                <div class="col-span-6 sm:col-span-4">
-                    <InputLabel for="name" value="Name" />
-                    <TextInput
-                        id="name"
+                <FormGroup class="col-span-6 sm:col-span-4" :error="createApiTokenForm.errors.name">
+                    <FormLabel>Name</FormLabel>
+                    <FormInput
                         v-model="createApiTokenForm.name"
                         type="text"
-                        class="mt-1 block w-full"
                         autofocus
                     />
-                    <InputError :message="createApiTokenForm.errors.name" class="mt-2" />
-                </div>
+                </FormGroup>
 
                 <!-- Token Permissions -->
                 <div v-if="availablePermissions.length > 0" class="col-span-6">
@@ -118,9 +119,9 @@ const deleteApiToken = () => {
                     Created.
                 </ActionMessage>
 
-                <PrimaryButton :class="{ 'opacity-25': createApiTokenForm.processing }" :disabled="createApiTokenForm.processing">
+                <AppButton :class="{ 'opacity-25': createApiTokenForm.processing }" :disabled="createApiTokenForm.processing">
                     Create
-                </PrimaryButton>
+                </AppButton>
             </template>
         </FormSection>
 
@@ -215,14 +216,14 @@ const deleteApiToken = () => {
                     Cancel
                 </SecondaryButton>
 
-                <PrimaryButton
+                <AppButton
                     class="ml-3"
                     :class="{ 'opacity-25': updateApiTokenForm.processing }"
                     :disabled="updateApiTokenForm.processing"
                     @click="updateApiToken"
                 >
                     Save
-                </PrimaryButton>
+                </AppButton>
             </template>
         </DialogModal>
 

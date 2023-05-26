@@ -1,7 +1,6 @@
 <template>
     <label v-bind="labelBindings" :class="[
         'block text-sm font-medium leading-6 text-gray-900',
-        { 'text-red-600': data.error }
     ]">
         <slot />
     </label>

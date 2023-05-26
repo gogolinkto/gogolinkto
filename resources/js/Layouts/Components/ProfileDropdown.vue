@@ -43,5 +43,6 @@ const user = computed<UserProfile>(() => {
 
 const userNavigation = [
     { name: 'Your profile', href: route('profile.show') },
+    { name: 'API Tokens', href: route('api-tokens.index') },
 ]
 </script>

@@ -1,6 +1,5 @@
 <template>
     <Head v-if="title" :title="title" />
-
     <div>
         <TransitionRoot as="template" :show="sidebarOpen">
             <Dialog as="div" class="relative z-50 lg:hidden" @close="sidebarOpen = false">
@@ -21,27 +20,18 @@
                             </TransitionChild>
                             <!-- Sidebar component, swap this element with another sidebar if you like -->
                             <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4">
-                                <div class="flex h-16 shrink-0 items-center">
-                                    <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
+                                <div class="flex justify-center h-24 shrink-0 items-center pt-4">
+                                    <Logo :size="140" />
                                 </div>
                                 <nav class="flex flex-1 flex-col">
                                     <ul role="list" class="flex flex-1 flex-col gap-y-7">
-                                        <li>
-                                            <ul role="list" class="-mx-2 space-y-1">
-                                                <li v-for="item in navigation" :key="item.name">
-                                                    <a :href="item.href" :class="[item.current ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
-                                                        <component :is="item.icon" :class="[item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600', 'h-6 w-6 shrink-0']" aria-hidden="true" />
-                                                        {{ item.name }}
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
+                                        <SidebarNavigation />
                                         <SidebarTeamSwitcher />
                                         <li class="mt-auto">
-                                            <a href="#" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600">
-                                                <Cog6ToothIcon class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600" aria-hidden="true" />
-                                                Settings
-                                            </a>
+                                            <Link :href="route('teams.show', { team: currentTeamId })" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-primary-600">
+                                                <Cog6ToothIcon class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-primary-600" aria-hidden="true" />
+                                                Team Settings
+                                            </Link>
                                         </li>
                                     </ul>
                                 </nav>
@@ -61,22 +51,13 @@
                 </div>
                 <nav class="flex flex-1 flex-col">
                     <ul role="list" class="flex flex-1 flex-col gap-y-7">
-                        <li>
-                            <ul role="list" class="-mx-2 space-y-1">
-                                <li v-for="item in navigation" :key="item.name">
-                                    <a :href="item.href" :class="[item.current ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']">
-                                        <component :is="item.icon" :class="[item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600', 'h-6 w-6 shrink-0']" aria-hidden="true" />
-                                        {{ item.name }}
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <SidebarNavigation />
                         <SidebarTeamSwitcher />
                         <li class="mt-auto">
-                            <a href="#" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600">
-                                <Cog6ToothIcon class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600" aria-hidden="true" />
-                                Settings
-                            </a>
+                            <Link :href="route('teams.show', { team: currentTeamId })" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-primary-600">
+                                <Cog6ToothIcon class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-primary-600" aria-hidden="true" />
+                                Team Settings
+                            </Link>
                         </li>
                     </ul>
                 </nav>
@@ -121,14 +102,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import {computed, ref} from 'vue'
 import {
     Dialog,
     DialogPanel,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
     TransitionChild,
     TransitionRoot,
 } from '@headlessui/vue'
@@ -144,11 +121,11 @@ import {
     UsersIcon,
     XMarkIcon,
 } from '@heroicons/vue/24/outline'
-import { ChevronDownIcon } from '@heroicons/vue/20/solid'
-import {Head, Link} from "@inertiajs/vue3";
+import {Head, Link, usePage} from "@inertiajs/vue3";
 import Logo from "@/Components/Generic/Logo.vue";
 import SidebarTeamSwitcher from "@/Layouts/Components/SidebarTeamSwitcher.vue";
 import ProfileDropdown from "@/Layouts/Components/ProfileDropdown.vue";
+import SidebarNavigation from "@/Layouts/Components/SidebarNavigation.vue";
 
 defineProps({
     title: {
@@ -157,14 +134,12 @@ defineProps({
     },
 })
 
-const navigation = [
-    { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-    { name: 'Team', href: '#', icon: UsersIcon, current: false },
-    { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-    { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-    { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-    { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
-]
+const page = usePage();
 
 const sidebarOpen = ref(false)
+const currentTeamId = computed(() => {
+    const props = page.props;
+
+    return props.auth.user.current_team_id;
+})
 </script>

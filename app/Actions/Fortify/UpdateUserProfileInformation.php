@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Http\Frontend\Notification\SimpleNotification;
 use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
@@ -36,6 +37,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'email' => $input['email'],
             ])->save();
         }
+
+        SimpleNotification::success('Profile updated', 'Your profile has been updated successfully.')
+            ->autoCloseAfter(2)
+            ->dispatch();
     }
 
     /**

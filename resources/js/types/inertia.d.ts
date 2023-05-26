@@ -8,6 +8,7 @@ declare global {
                 name: string;
                 email: string;
                 profile_photo_url: string;
+                current_team_id: number;
                 created_at: Date;
                 updated_at: Date;
             };
@@ -16,6 +17,8 @@ declare global {
             };
             errorBags: unknown;
             errors: unknown;
+            notifications: any[];
+            routeName: string;
         }
     }
 }

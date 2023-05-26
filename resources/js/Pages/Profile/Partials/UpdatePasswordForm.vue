@@ -8,6 +8,9 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import AppButton from "@/Components/Generic/AppButton.vue";
+import FormGroup from "@/Components/Form/FormGroup.vue";
+import FormLabel from "@/Components/Form/FormLabel.vue";
+import FormInput from "@/Components/Form/FormInput.vue";
 
 const passwordInput = ref(null);
 const currentPasswordInput = ref(null);
@@ -49,43 +52,34 @@ const updatePassword = () => {
         </template>
 
         <template #form>
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="current_password" value="Current Password" />
-                <TextInput
-                    id="current_password"
+            <FormGroup class="col-span-6 sm:col-span-4" :error="form.errors.current_password">
+                <FormLabel>Current Password</FormLabel>
+                <FormInput
                     ref="currentPasswordInput"
                     v-model="form.current_password"
                     type="password"
-                    class="mt-1 block w-full"
                     autocomplete="current-password"
                 />
-                <InputError :message="form.errors.current_password" class="mt-2" />
-            </div>
+            </FormGroup>
 
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="password" value="New Password" />
-                <TextInput
-                    id="password"
+            <FormGroup class="col-span-6 sm:col-span-4" :error="form.errors.password">
+                <FormLabel>Password</FormLabel>
+                <FormInput
                     ref="passwordInput"
                     v-model="form.password"
                     type="password"
-                    class="mt-1 block w-full"
                     autocomplete="new-password"
                 />
-                <InputError :message="form.errors.password" class="mt-2" />
-            </div>
+            </FormGroup>
 
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="password_confirmation" value="Confirm Password" />
-                <TextInput
-                    id="password_confirmation"
+            <FormGroup class="col-span-6 sm:col-span-4" :error="form.errors.password_confirmation">
+                <FormLabel>Confirm Password</FormLabel>
+                <FormInput
                     v-model="form.password_confirmation"
                     type="password"
-                    class="mt-1 block w-full"
                     autocomplete="new-password"
                 />
-                <InputError :message="form.errors.password_confirmation" class="mt-2" />
-            </div>
+            </FormGroup>
         </template>
 
         <template #actions>

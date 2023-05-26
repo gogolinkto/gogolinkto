@@ -5,6 +5,10 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import FormGroup from "@/Components/Form/FormGroup.vue";
+import FormLabel from "@/Components/Form/FormLabel.vue";
+import FormInput from "@/Components/Form/FormInput.vue";
+import AppButton from "@/Components/Generic/AppButton.vue";
 
 const form = useForm({
     name: '',
@@ -44,23 +48,20 @@ const createTeam = () => {
                 </div>
             </div>
 
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="name" value="Team Name" />
-                <TextInput
-                    id="name"
+            <FormGroup class="col-span-6 sm:col-span-4" :error="form.errors.name">
+                <FormLabel>Team name</FormLabel>
+                <FormInput
                     v-model="form.name"
                     type="text"
-                    class="block w-full mt-1"
                     autofocus
                 />
-                <InputError :message="form.errors.name" class="mt-2" />
-            </div>
+            </FormGroup>
         </template>
 
         <template #actions>
-            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <AppButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Create
-            </PrimaryButton>
+            </AppButton>
         </template>
     </FormSection>
 </template>

@@ -2,6 +2,7 @@
 
 namespace App\Actions\Jetstream;
 
+use App\Http\Frontend\Notification\SimpleNotification;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
@@ -31,6 +32,11 @@ class CreateTeam implements CreatesTeams
             'name' => $input['name'],
             'personal_team' => false,
         ]));
+
+        SimpleNotification::success(
+            'Team Created',
+            'Your team has been created successfully.'
+        )->autoCloseAfter(3)->dispatch();
 
         return $team;
     }

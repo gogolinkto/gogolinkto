@@ -2,6 +2,7 @@
 
 namespace App\Actions\Jetstream;
 
+use App\Http\Frontend\Notification\SimpleNotification;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
@@ -26,5 +27,10 @@ class UpdateTeamName implements UpdatesTeamNames
         $team->forceFill([
             'name' => $input['name'],
         ])->save();
+
+        SimpleNotification::success(
+            'Team Updated',
+            'Your team has been updated successfully.'
+        )->autoCloseAfter(3)->dispatch();
     }
 }
