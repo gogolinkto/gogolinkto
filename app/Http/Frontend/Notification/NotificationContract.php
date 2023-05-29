@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Frontend\Notification;
+
 interface NotificationContract
 {
     public function getComponent(): string;

@@ -12,8 +12,7 @@ class SimpleNotification implements NotificationContract
         public readonly string $type,
         public readonly string $title,
         public readonly string $message,
-    )
-    {
+    ) {
     }
 
     public static function success(string $title, string $message): self

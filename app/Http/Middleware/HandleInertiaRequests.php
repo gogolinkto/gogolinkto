@@ -37,8 +37,8 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
-            'notifications' => fn() => Notification::share(),
-            'routeName' => fn() => $request->route()->getName(),
+            'notifications' => fn () => Notification::share(),
+            'routeName' => fn () => $request->route()->getName(),
         ]);
     }
 }
